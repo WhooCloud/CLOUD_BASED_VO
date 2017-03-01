@@ -1,0 +1,26 @@
+worker_processes  1;
+error_log  logs/error.log  info;
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+    lua_package_path '/usr/local/openresty/lualib/?.lua;;';
+    sendfile        on;
+    keepalive_timeout  65;
+
+    server {
+        listen 80;
+        server_name localhost;
+        lua_code_cache off;
+
+        location /websocket{
+            content_by_lua_file lua/load_balancing_webserver.lua;
+        }
+
+    }
+
+}

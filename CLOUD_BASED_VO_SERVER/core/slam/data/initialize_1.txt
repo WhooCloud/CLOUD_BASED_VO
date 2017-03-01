@@ -1,0 +1,8 @@
+type=initialize
+min_inliers=5
+max_norm=0.3
+camera_cx=325.5
+camera_cy=253.5
+camera_fx=518
+camera_fy=519
+camera_scale=1000

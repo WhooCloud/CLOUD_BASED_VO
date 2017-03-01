@@ -1,0 +1,32 @@
+LIST( APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake_modules )
+SET( RAPIDJSON_ROOT /home/yun/Code/CPP/rapidjson-master/include )
+FIND_PACKAGE( GTestSrc REQUIRED )
+
+ADD_LIBRARY( robot_ robot_.cpp )
+TARGET_LINK_LIBRARIES( robot_ )
+
+ADD_LIBRARY( robotJson robotJson.cpp )
+TARGET_LINK_LIBRARIES( robotJson )
+
+ADD_LIBRARY( robotWS robotWS.cpp )
+TARGET_LINK_LIBRARIES( robotWS
+boost_system
+crypto
+ssl
+cpprest)
+
+ADD_EXECUTABLE( robotPthread robotPthread.cpp )
+TARGET_LINK_LIBRARIES( robotPthread 
+robotJson
+robotWS
+robot_
+pthread
+)
+
+ADD_EXECUTABLE( delayExp delayExp.cpp )
+TARGET_LINK_LIBRARIES( delayExp 
+robotJson
+robotWS
+robot_
+robotPthread
+)
