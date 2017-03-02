@@ -21,6 +21,7 @@ int main()
 	int min_good_match= atoi(pd.getData("min_good_match").c_str());
 	string initial_message = pd.getData("initial_message");
 	string mainloop_message = pd.getData("mainloop_message");
+	string close_message = pd.getData("close_message");
 	double good_match_threshold = atof(pd.getData("good_match_threshold").c_str());
 	cout<<"Parameters Loaded Successfully!"<<endl;
 
@@ -48,8 +49,15 @@ int main()
 	client.setDataSend(initialMessage.getString());
 	client.sendData();
 	cout<<"Initiallizing Message Sent to Server Successfully!"<<endl;
-	cout<<"initiallizing Message is: "<<initialMessage.getString()<<endl;
+	cout<<"Initiallizing Message is: "<<initialMessage.getString()<<endl;
 
+	client.receiveData();
+	string stringDataReceiveInitial = client.getDataReceive();
+	cout<<"Initiallizing Message from Server: "<<stringDataReceiveInitial<<endl;
+	RobotJson receivedMessageInitial;
+	receivedMessageInitial.setString(stringDataReceiveInitial);
+	if(receivedMessageInitial.getDocString("type")==string("ERROR"))
+		cout<< RED "Error From Server "<<receivedMessageInitial.getDocString("result")<<" " RESET<<endl;
 	cout<<"Running in Main Loop..."<<endl;
 	RobotJson mainLoopMessage;
 	mainLoopMessage.setString(mainloop_message);
@@ -78,20 +86,6 @@ int main()
 		receivedMessage.setString(stringDataReceive);
 		string type = receivedMessage.getDocString("type");
 		cout<<"type is: "<<type<<endl;
-		// if(type == "RESULT")
-		// {
-		// 	vector<double> tMatrix;
-		// 	tMatrix = receivedMessage.getDocDoubleArray("matrix");
-		// 	int inliers = receivedMessage.getDocInt("inliers");
-		//     Eigen::Isometry3d TMatrix = createTMatrix(tMatrix);
-		//     //cout<<TMatrix.matrix()<<endl;
-		// 	cloud = joinPointCloud(cloud, currFrame, TMatrix, camera);
-		   	
-		// 	if(visualize == true)
-		// 		viewer.showCloud(cloud);
-
-		// 	lastFrame = currFrame;
-		// }
 		if(type == string("RESULT"))
 		{
 			string str_tMatrix = receivedMessage.getDocString("matrix");
@@ -113,6 +107,13 @@ int main()
 
 	}
 
+	client.setDataSend(close_message);
+	client.sendData();
+
+	client.receiveData();
+	string stringDataReceiveClose = client.getDataReceive();
+	cout<<stringDataReceiveClose<<endl;
+	
 	client.close();
 	cout<<"Connection Closed!"<<endl;
 	//pcl::io::savePCDFile("./data/result.pcd", *cloud);

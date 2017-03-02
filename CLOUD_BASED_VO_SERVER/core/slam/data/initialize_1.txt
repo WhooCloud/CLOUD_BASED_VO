@@ -1,5 +1,6 @@
+curr_dir=/usr/local/openresty/nginx/sbin
 type=initialize
-min_inliers=5
+min_inliers=6
 max_norm=0.3
 camera_cx=325.5
 camera_cy=253.5

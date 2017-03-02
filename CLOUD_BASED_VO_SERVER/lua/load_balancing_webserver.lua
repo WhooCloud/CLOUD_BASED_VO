@@ -46,25 +46,29 @@ if not wb then
     return ngx.exit(444)
 end
 
+local close_string = "{\"type\" : \"close\", \"result\" : \"Success\"}"
 while true
 do
     local data = receive_text(wb)
     local c_result = slamInterface.FFIInterface(data)
-    local receive_json = cjson.decode(data)
+    --local receive_json = cjson.decode(data)
     ngx.log(ngx.INFO, "receive data is: ", data)
-    ngx.log(ngx.INFO, "type is: ", receive_json.type)
-    ngx.log(ngx.INFO, "pts_obj ", receive_json.pts_obj)
-    ngx.log(ngx.INFO, "pts_img ", receive_json.pts_img) 
-    ngx.log(ngx.INFO, "c_result ", ffi.string(c_result))   
-    local obj = 
-    {
-        type = "RESULT",
-        matrix = "0.999998,0.000596079,0.00178472,-0.00488085;-0.000597109,1,0.000576504,-0.00236156;-0.00178437,-0.000577568,0.999998,-0.0075835;0,0,0,1;",
-        inliers = 20
-    }
-    local str = cjson.encode(obj)
+    --ngx.log(ngx.INFO, "type is: ", receive_json.type)
+    --ngx.log(ngx.INFO, "pts_obj ", receive_json.pts_obj)
+    --ngx.log(ngx.INFO, "pts_img ", receive_json.pts_img) 
+    ngx.log(ngx.INFO, "c_result ", ffi.string(c_result)) 
+    ngx.log(ngx.INFO, "close: ", close_string == ffi.string(c_result))  
+
     local bytes, err = wb:send_text(ffi.string(c_result))
+
+    if(close_string == ffi.string(c_result)) 
+    then
+        ngx.log(ngx.INFO, "close actively!")
+        break
+    end
+
 end
+
 if not bytes then
     ngx.log(ngx.ERR, "failed to send a text frame: ", err)
     return ngx.exit(444)
