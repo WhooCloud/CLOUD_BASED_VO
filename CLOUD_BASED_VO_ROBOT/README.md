@@ -39,10 +39,10 @@ Replace "server *" with "server ${SERVER_IP}"
 ***NOTE: NO WHITH_SPACE in parameters.txt***
 
 ###3. CBVOR/src/CMakeLists.txt
-* add include directories of Eigen & RapidJson
-add these lines to your CMakeLists.txt
-INCLUDE_DIRECTORIES(/usr/include/eigen3/)
-INCLUDE_DIRECTORIES( /home/ubuntu/CLOUD_BASED_VO/rapidjson-master/include/ )
+* add include directories of Eigen & RapidJson  
+add these lines to your CMakeLists.txt  
+INCLUDE_DIRECTORIES(/usr/include/eigen3/)  
+INCLUDE_DIRECTORIES( /home/ubuntu/CLOUD_BASED_VO/rapidjson-master/include/ )  
 
 ## Build
 cd ${CBVOR}

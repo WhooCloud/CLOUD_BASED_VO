@@ -33,9 +33,9 @@ Replace "allow *" with "allow 0/0"
 
 ###3. core/slam/src/CMakeLists.txt
 * add include directories of Eigen & RapidJson
-add this two lines to your CMakeLists.txt
-INCLUDE_DIRECTORIES(/usr/include/eigen3/)
-INCLUDE_DIRECTORIES(/home/ubuntu/CLOUD_BASED_VO/rapidjson-master/include/)
+add this two lines to your CMakeLists.txt  
+INCLUDE_DIRECTORIES(/usr/include/eigen3/)  
+INCLUDE_DIRECTORIES(/home/ubuntu/CLOUD_BASED_VO/rapidjson-master/include/)  
 ## Build
 cd ${CBVOS/core/slam}
 mkdir build
