@@ -1,4 +1,4 @@
-#include "slamBase.h"
+#include "slamBase_server.h"
 #include <iostream>
 
 FRAME readFrame(int index, ParameterReader& pd)

@@ -1,5 +1,5 @@
-#ifndef ROBOT_BASE_H
-#define ROBOT_BASE_H
+#ifndef ROBOT_BASE_SERVER_H
+#define ROBOT_BASE_SERVER_H
 
 #include <string>
 #include <iostream>

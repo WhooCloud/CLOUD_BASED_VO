@@ -1,6 +1,6 @@
 #include "slamInterface.h"
-#include "slamBase.h"
-#include "robotBase.h"
+#include "slamBase_server.h"
+#include "robotBase_server.h"
 #include <unistd.h>
 
 using namespace cv;

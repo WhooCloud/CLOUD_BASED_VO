@@ -1,5 +1,5 @@
-#ifndef SLAM_BASE_H
-#define SLAM_BASE_H
+#ifndef SLAM_BASE_SERVER_H
+#define SLAM_BASE_SERVER_H
 
 #include <fstream>
 #include <vector>
