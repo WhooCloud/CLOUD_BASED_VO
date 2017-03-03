@@ -1,0 +1,25 @@
+#FIND_PACKAGE( PCL REQUIRED COMPONENTS common io visualization filters)
+#list(REMOVE_ITEM PCL_LIBRARIES "vtkproj4")
+
+#FIND_PACKAGE( OpenCV REQUIRED)
+
+#ADD_DEFINITIONS(${PCL_DEFINITIONS})
+#INCLUDE_DIRECTORIES(${PCL_INCLUDE_DIRS})
+#LINK_LIBRARIES(${PCL_LIBRARY_DIRS})
+
+#ADD_LIBRARY(slamBase slamBase.cpp)
+#TARGET_LINK_LIBRARIES(slamBase
+#	${OpenCV_LIBS}
+#	${PCL_LIBRARIES} )
+
+
+INCLUDE_DIRECTORIES(/usr/include/eigen3/)
+ADD_EXECUTABLE( eigenMatrix eigenMatrix.cpp)
+TARGET_LINK_LIBRARIES( eigenMatrix)
+
+#LIST( APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake_modules )
+FIND_PACKAGE(Sophus REQUIRED)
+INCLUDE_DIRECTORIES(/home/yun/Code/SLAM/Sophus/)
+
+ADD_EXECUTABLE(useSophus useSophus.cpp)
+target_link_libraries(useSophus ${Sophus_LIBRARIES})

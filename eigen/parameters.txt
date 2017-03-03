@@ -1,0 +1,19 @@
+#PARAMETER.TXT
+# features
+detector=ORB
+descriptor=ORB
+
+# camera
+camera.cx=325.5;
+camera.cy=253.5;
+camera.fx=518.0;
+camera.fy=519.0;
+camera.scale=1000.0;
+
+# data
+rgb_dir=./data/rgb_png/
+rgb_extension=.png
+depth_dir=./data/depth_png/
+depth_extension=.png
+
+visualize_pointcloud=no
