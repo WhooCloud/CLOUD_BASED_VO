@@ -3,7 +3,7 @@
 
 #include <fstream>
 #include <vector>
-using namespace std;
+#include <iostream>
 
 // OpenCV
 #include <opencv2/highgui/highgui.hpp>
@@ -12,19 +12,19 @@ using namespace std;
 #include <opencv2/calib3d/calib3d.hpp>
 
 // PCL
-#include <pcl/io/pcd_io.h>
-#include <pcl/point_types.h>
-#include <pcl/common/transforms.h>
-#include <pcl/visualization/cloud_viewer.h>
-#include <pcl/filters/voxel_grid.h> //???
+// #include <pcl/io/pcd_io.h>
+// #include <pcl/point_types.h>
+// #include <pcl/common/transforms.h>
+// #include <pcl/visualization/cloud_viewer.h>
+// #include <pcl/filters/voxel_grid.h> //???
 
 // Eigen
 #include <Eigen/Core>
 #include <Eigen/Geometry>
 
-typedef pcl::PointXYZRGBA PointT;
-typedef pcl::PointCloud<PointT> PointCloud;
-
+// typedef pcl::PointXYZRGBA PointT;
+// typedef pcl::PointCloud<PointT> PointCloud;
+using namespace std;
 struct RESULT_OF_PNP
 {
 	cv::Mat rvec, tvec;
@@ -100,14 +100,14 @@ inline static CAMERA_INTRINSIC_PARAMETERS getDefaultCamera()
 
 FRAME readFrame(int index, ParameterReader& pd);
 void computeKeyPointsAndDesp(FRAME& frame, string detector, string descriptor);
-PointCloud::Ptr image2PointCloud(cv::Mat& rgb, cv::Mat& depth, \
-			CAMERA_INTRINSIC_PARAMETERS& camera);
+// PointCloud::Ptr image2PointCloud(cv::Mat& rgb, cv::Mat& depth, \
+// 			CAMERA_INTRINSIC_PARAMETERS& camera);
 cv::Point3f point2dTo3d(cv::Point3f& point, CAMERA_INTRINSIC_PARAMETERS& camera);
 int computeObjAndImage(FRAME& frame1, FRAME& frame2,\
 		vector<cv::Point3f>& pts_obj, vector<cv::Point2f>& pts_img,\
 		CAMERA_INTRINSIC_PARAMETERS& camera, \
 		int min_good_match, double good_match_threshold);
-PointCloud::Ptr joinPointCloud( PointCloud::Ptr original, FRAME& newFrame, \
+// PointCloud::Ptr joinPointCloud( PointCloud::Ptr original, FRAME& newFrame, \
 		Eigen::Isometry3d T, CAMERA_INTRINSIC_PARAMETERS& camera ) ;
 Eigen::Isometry3d cvMat2Eigen(cv::Mat& rvec, cv::Mat& tvec);
 #endif

@@ -13,8 +13,6 @@ string eigenTToString(const Eigen::Isometry3d T);
 string slamCore(vector<cv::Point3f> &pts_obj, vector<cv::Point2f> &pts_img, Mat_<float>& cameraMatrix, ParameterReader& pd);
 double normofTransform(const cv::Mat rvec, const cv::Mat tvec);
 
-
-
 extern "C" char* FFIInterface(const char* data)
 {
 	cout<<"FFIInterface: "<<"Running..."<<endl;

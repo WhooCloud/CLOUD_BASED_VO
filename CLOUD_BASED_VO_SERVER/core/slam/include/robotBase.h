@@ -5,8 +5,8 @@
 #include <iostream>
 #include <fstream>
 #include <map>
-#include <cpprest/ws_client.h>
-#include <cpprest/filestream.h>
+// #include <cpprest/ws_client.h>
+// #include <cpprest/filestream.h>
 #include "rapidjson/document.h"
 #include "rapidjson/prettywriter.h"
 #include "rapidjson/stringbuffer.h"
@@ -15,9 +15,9 @@
 //#include <iomanip> // setprecision
 
 using namespace std;
-using namespace utility;
-using namespace web;
-using namespace web::websockets::client;
+// using namespace utility;
+// using namespace web;
+// using namespace web::websockets::client;
 using namespace rapidjson;
 
 #define ROBOTJSON_MAXSTRINGLENGTH 100*1024 //100KB
@@ -44,27 +44,27 @@ public:
 	vector<double> getDocDoubleArray(const char* key);
 };
 
-class RobotClient
-{
-private:
-	string 			 m_url;
-	string 			 m_data_send;
-	string 			 m_data_receive;
-	websocket_client m_client;
+// class RobotClient
+// {
+// private:
+// 	string 			 m_url;
+// 	string 			 m_data_send;
+// 	string 			 m_data_receive;
+// 	websocket_client m_client;
 
-public:
-	RobotClient();
-	~RobotClient();
+// public:
+// 	RobotClient();
+// 	~RobotClient();
 
-	void connect();
-	void sendData();
-	void setURL(const string &url);
-	void receiveData();
-	void setDataSend(const string &data_send);
-	void close();
+// 	void connect();
+// 	void sendData();
+// 	void setURL(const string &url);
+// 	void receiveData();
+// 	void setDataSend(const string &data_send);
+// 	void close();
 
-	string getDataReceive();
-};
+// 	string getDataReceive();
+// };
 
 
 #define RESET "\033[0m"

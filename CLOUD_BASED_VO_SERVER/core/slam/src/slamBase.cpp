@@ -1,4 +1,5 @@
 #include "slamBase.h"
+#include <iostream>
 
 FRAME readFrame(int index, ParameterReader& pd)
 {
@@ -21,37 +22,37 @@ FRAME readFrame(int index, ParameterReader& pd)
 	return f;
 }
 
-PointCloud::Ptr image2PointCloud(cv::Mat& rgb, cv::Mat& depth, \
-								CAMERA_INTRINSIC_PARAMETERS& camera)
-{
-	PointCloud::Ptr cloud(new PointCloud);
+// PointCloud::Ptr image2PointCloud(cv::Mat& rgb, cv::Mat& depth, \
+// 								CAMERA_INTRINSIC_PARAMETERS& camera)
+// {
+// 	PointCloud::Ptr cloud(new PointCloud);
 
-	for(int m = 0; m < depth.rows; m++)
-		for(int n = 0; n < depth.cols; n++)
-		{
-			ushort d = depth.ptr<ushort>(m)[n];
+// 	for(int m = 0; m < depth.rows; m++)
+// 		for(int n = 0; n < depth.cols; n++)
+// 		{
+// 			ushort d = depth.ptr<ushort>(m)[n];
 
-			if(d == 0)
-				continue;
+// 			if(d == 0)
+// 				continue;
 
-			PointT p;
-			p.z = double(d) / camera.scale;
-			p.x = (n - camera.cx) * p.z / camera.fx;
-			p.y = (m - camera.cy) * p.z / camera.fy;
+// 			PointT p;
+// 			p.z = double(d) / camera.scale;
+// 			p.x = (n - camera.cx) * p.z / camera.fx;
+// 			p.y = (m - camera.cy) * p.z / camera.fy;
 
-			p.b = rgb.ptr<uchar>(m)[n*3];
-			p.g = rgb.ptr<uchar>(m)[n*3+1];
-			p.r = rgb.ptr<uchar>(m)[n*3+2];
+// 			p.b = rgb.ptr<uchar>(m)[n*3];
+// 			p.g = rgb.ptr<uchar>(m)[n*3+1];
+// 			p.r = rgb.ptr<uchar>(m)[n*3+2];
 
-			cloud->points.push_back(p);
-		}
+// 			cloud->points.push_back(p);
+// 		}
 
-	cloud->height = 1;
-	cloud->width = cloud->points.size();
-	cloud->is_dense = false;
+// 	cloud->height = 1;
+// 	cloud->width = cloud->points.size();
+// 	cloud->is_dense = false;
 
-	return cloud;
-}
+// 	return cloud;
+// }
 
 void computeKeyPointsAndDesp(FRAME& frame, string detector, string descriptor)
 {
@@ -133,24 +134,24 @@ int computeObjAndImage(FRAME& frame1, FRAME& frame2,\
 
 }
 
-PointCloud::Ptr joinPointCloud(PointCloud::Ptr original, FRAME& newFrame, Eigen::Isometry3d T, CAMERA_INTRINSIC_PARAMETERS& camera)
-{
-	PointCloud::Ptr newCloud = image2PointCloud(newFrame.rgb, newFrame.depth, camera);
+// PointCloud::Ptr joinPointCloud(PointCloud::Ptr original, FRAME& newFrame, Eigen::Isometry3d T, CAMERA_INTRINSIC_PARAMETERS& camera)
+// {
+// 	PointCloud::Ptr newCloud = image2PointCloud(newFrame.rgb, newFrame.depth, camera);
 
-	PointCloud::Ptr output(new PointCloud());
-	pcl::transformPointCloud(*original, *output, T.matrix());
-	*newCloud += *output;
+// 	PointCloud::Ptr output(new PointCloud());
+// 	pcl::transformPointCloud(*original, *output, T.matrix());
+// 	*newCloud += *output;
 
-	//Voxel gird filter subsamppling
-	static pcl::VoxelGrid<PointT> voxel;
-	static ParameterReader pd;
-	double gridsize = atof(pd.getData("voxel_grid").c_str());
-	voxel.setLeafSize(gridsize, gridsize,gridsize);
-	voxel.setInputCloud(newCloud);
-	PointCloud::Ptr tmp(new PointCloud());
-	voxel.filter(*tmp);
-	return tmp;
-}
+// 	//Voxel gird filter subsamppling
+// 	static pcl::VoxelGrid<PointT> voxel;
+// 	static ParameterReader pd;
+// 	double gridsize = atof(pd.getData("voxel_grid").c_str());
+// 	voxel.setLeafSize(gridsize, gridsize,gridsize);
+// 	voxel.setInputCloud(newCloud);
+// 	PointCloud::Ptr tmp(new PointCloud());
+// 	voxel.filter(*tmp);
+// 	return tmp;
+// }
 
 Eigen::Isometry3d cvMat2Eigen(cv::Mat& rvec, cv::Mat& tvec)
 {
