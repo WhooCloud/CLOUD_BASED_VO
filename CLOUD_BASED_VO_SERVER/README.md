@@ -43,12 +43,12 @@ INCLUDE_DIRECTORIES(/usr/include/eigen3/)
 INCLUDE_DIRECTORIES(/home/ubuntu/CLOUD_BASED_VO/rapidjson-master/include/)  
 
 ## Build
-cd ${CBVOS/core/slam}
-mkdir build
-cd build
-cmake ..
-make
+cd ${CBVOS/core/slam}  
+mkdir build    
+cd build  
+cmake ..  
+make  
 
 ## Run CBVOS
-cd /usr/local/openresty/nginx/sbin
-sudo ./ -p ${CBVOS}
+cd /usr/local/openresty/nginx/sbin  
+sudo ./ -p ${CBVOS}  
