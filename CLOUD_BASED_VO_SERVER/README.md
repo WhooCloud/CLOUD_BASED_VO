@@ -26,9 +26,11 @@ Write "1 admin" into the first line.
 * Modify /etc/chrony/chrony.conf
 Replace "allow *" with "allow 0/0"
 * sudo service chrony restart
+
 ###2. core/slam/src/SlamInterface.cpp
 * Modify the variable ***string robotPath*** with the absolute path of data directory ***${robotPath}*** on your server.
 * chmod 777 -R ***${robotPath}***
+
 ###3. core/slam/src/CMakeLists.txt
 * add include directories of Eigen & RapidJson
 add this two lines to your CMakeLists.txt
