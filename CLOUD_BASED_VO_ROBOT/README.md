@@ -38,9 +38,9 @@ Replace "server *" with "server ${SERVER_IP}"
 * sudo service chrony restart
 
 ###2. CBVOR/parameters.txt
-*modify "url=ws://13.124.50.218/websocket" to "url=ws://${SERVER_IP}/websocket"
-*modify "rgb_dir=/home/yun/dataset/RGBD_SLAM/rgb_png/" to "rgb_dir=${RGB_DIR}"
-*modify "depth_dir=/home/yun/dataset/RGBD_SLAM/depth_png/"" to "depth_dir=${DEPTH_DIR}"
+* modify "url=ws://13.124.50.218/websocket" to "url=ws://${SERVER_IP}/websocket"
+* modify "rgb_dir=/home/yun/dataset/RGBD_SLAM/rgb_png/" to "rgb_dir=${RGB_DIR}"
+* modify "depth_dir=/home/yun/dataset/RGBD_SLAM/depth_png/"" to "depth_dir=${DEPTH_DIR}"
 
 ***NOTE: NO WHITH_SPACE in parameters.txt***
 
