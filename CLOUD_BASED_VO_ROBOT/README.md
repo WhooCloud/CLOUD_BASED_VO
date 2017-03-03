@@ -2,6 +2,7 @@
 ## Prerequisites 
 ###1. Chrony
 sudo apt-get install chrony
+
 ###2. Casablanca
 cd  
 sudo apt-get install g++ git make zlib1g-dev libboost-all-dev libssl-dev cmake  
@@ -12,17 +13,22 @@ mkdir build.debug
 cd build.debug  
 cmake .. -DCMAKE_BUILD_TYPE=Debug  
 make  
-sudo make install  
+sudo make install 
+ 
 ###3. OpenCV
 sudo apt-get install libopencv-dev
+
 ###4. Eigen
 sudo apt-get install libeigen3-dev
+
 ###5. RapidJson
 RapidJson is included in CBVOS
+
 ###6. PCL
 sudo add-apt-repository ppa:v-launchpad-jochen-sprickerhof-de/pcl
 sudo apt-get update
 sudo apt-get install libpcl-all
+
 ## Enveironment Configuration
 ###1. Chrony
 * Modify /etc/chrony/chrony.key
@@ -50,5 +56,6 @@ mkdir build
 cd build
 cmake ..
 make
+
 ## Run CBVOR
 ./bin/robot
