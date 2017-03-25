@@ -53,7 +53,7 @@ int main()
 	initialMessage.setDocInt("min_inliers", min_inliers);
 	initialMessage.setDocDouble("max_norm", max_norm);
 	client.setDataSend(initialMessage.getString());
-	client.sendTextData();
+	client.sendBinaryData();
 	cout<<"Initializing Message Sent to Server Successfully!"<<endl;
 	cout<<"Initializing Message is: "<<initialMessage.getString()<<endl;
 	cout<< YELLOW "Sending Initializing Message to Server Costs: "<<(getCurrentTime() - time1)*1000<<" ms" RESET <<endl;
@@ -101,7 +101,7 @@ int main()
 		mainLoopMessage.setDocString("pts_obj", strPtsObj);
 		mainLoopMessage.setDocString("pts_img", strPtsImg);
 		client.setDataSend(mainLoopMessage.getString());
-		client.sendTextData();
+		client.sendBinaryData();
 
 		client.receiveTextData();
 		string stringDataReceive = client.getDataReceive();
@@ -142,7 +142,7 @@ int main()
 	}
 
 	client.setDataSend(close_message);
-	client.sendTextData();
+	client.sendBinaryData();
 
 	client.receiveTextData();
 	string stringDataReceiveClose = client.getDataReceive();

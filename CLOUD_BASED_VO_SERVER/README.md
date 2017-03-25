@@ -42,9 +42,9 @@ add this two lines to your CMakeLists.txt
 INCLUDE_DIRECTORIES(/usr/include/eigen3/)  
 INCLUDE_DIRECTORIES(/home/ubuntu/CLOUD_BASED_VO/rapidjson-master/include/)  
 
-### 4. make some directories
-cd {CBVOS}
-mkdir logs
+### 4. lua/uploading.lua
+local dst_dir = "/home/yun/ServerData/"
+change dst_dir to the path where you want to save uploaded files
 
 ### 5. add dll path
 cd /ect/ld.so.conf.d/

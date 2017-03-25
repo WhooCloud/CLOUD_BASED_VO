@@ -15,4 +15,5 @@ ADD_LIBRARY(slamInterface SHARED slamInterface.cpp)
 TARGET_LINK_LIBRARIES(slamInterface
 	robotJson_server
 	slamBase_server
-	${OpenCV_LIBS})
+	${OpenCV_LIBS}
+	)

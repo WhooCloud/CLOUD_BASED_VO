@@ -70,7 +70,7 @@ void RobotClient::receiveBinaryData()
             streambuf.scopy((unsigned char *)&this->m_data_receive[0],m_data_receive.length());
         }
         else
-            cerr<< RED << "RobotClient::receiveTextData:"<< "The incomming message is not utf8 type." RESET <<endl;
+            cerr<< RED << "RobotClient::receiveBinaryData:"<< "The incomming message is not binary type." RESET <<endl;
     }).wait();  //this wait cannot be deleted!
     return;
 }

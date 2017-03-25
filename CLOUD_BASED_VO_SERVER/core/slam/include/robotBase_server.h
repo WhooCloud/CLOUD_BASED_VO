@@ -20,7 +20,7 @@ using namespace std;
 // using namespace web::websockets::client;
 using namespace rapidjson;
 
-#define ROBOTJSON_MAXSTRINGLENGTH 100*1024 //100KB
+#define ROBOTJSON_MAXSTRINGLENGTH 200*1024 //100KB
 
 class RobotJson
 {
