@@ -5,8 +5,10 @@
 #include <iostream>
 #include <fstream>
 #include <map>
+#include <cpprest/http_msg.h>
 #include <cpprest/ws_client.h>
 #include <cpprest/filestream.h>
+#include <cpprest/producerconsumerstream.h>
 #include "rapidjson/document.h"
 #include "rapidjson/prettywriter.h"
 #include "rapidjson/stringbuffer.h"
@@ -20,7 +22,7 @@ using namespace web;
 using namespace web::websockets::client;
 using namespace rapidjson;
 
-#define ROBOTJSON_MAXSTRINGLENGTH 100*1024 //100KB
+#define ROBOTJSON_MAXSTRINGLENGTH 200*1024 //100KB
 
 class RobotJson
 {
@@ -56,14 +58,18 @@ public:
 	RobotClient();
 	~RobotClient();
 
-	void connect();
-	void sendData();
 	void setURL(const string &url);
-	void receiveData();
+	void connect();
 	void setDataSend(const string &data_send);
+	void sendTextData();
+	void sendBinaryData();
+	
+	void receiveTextData();
+	void receiveBinaryData();
+	string getDataReceive();
 	void close();
 
-	string getDataReceive();
+	
 };
 
 

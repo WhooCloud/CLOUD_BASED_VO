@@ -11,17 +11,17 @@ ffi.cdef[[
 ]]
 end
 
-local function receive_text(wb)
+local function receiveData(wb)
     local data, typ, err = wb:recv_frame()
     if not data then
         ngx.log(ngx.ERR, "failed to receive a frame: ", err)
         return ngx.exit(444)
     end
-    if typ == "text" then
-        --ngx.log(ngx.INFO, "received a text frame: ", data);
+    if typ == "text" or typ == "binary" then
+        ngx.log(ngx.INFO, "received Data: ", data, " (", typ, ") ");
         return data
     else
-        ngx.log(ngx.ERR, "failed to receive a text, ", "the type is: ", typ)
+        ngx.log(ngx.ERR, "failed to receive Data, ", "the type is: ", typ)
         return nil
     end                                                                         
 end
@@ -49,7 +49,7 @@ end
 local close_string = "{\"type\" : \"close\", \"result\" : \"Success\"}"
 while true
 do
-    local data = receive_text(wb)
+    local data = receiveData(wb)
     local c_result = slamInterface.FFIInterface(data)
     --local receive_json = cjson.decode(data)
     ngx.log(ngx.INFO, "receive data is: ", data)

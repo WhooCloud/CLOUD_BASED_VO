@@ -1,0 +1,1 @@
+g++  -fPIC -std=c++11 -O3  -Wno-deprecated -O3 -DNDEBUG    -shared -Wl,-soname,librobot_.so -o ../../lib/librobot_.so CMakeFiles/robot_.dir/robot_.cpp.o  -L/home/yun/git_repo/CLOUD_BASED_VO/CLOUD_BASED_VO_ROBOT/lib -lz -Wl,-rpath,/home/yun/git_repo/CLOUD_BASED_VO/CLOUD_BASED_VO_ROBOT/lib 

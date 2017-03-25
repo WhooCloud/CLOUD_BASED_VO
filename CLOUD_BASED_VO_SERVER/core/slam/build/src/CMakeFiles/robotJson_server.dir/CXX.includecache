@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/robotBase_server.h
+string
+-
+iostream
+-
+fstream
+-
+map
+-
+rapidjson/document.h
+../include/rapidjson/document.h
+rapidjson/prettywriter.h
+../include/rapidjson/prettywriter.h
+rapidjson/stringbuffer.h
+../include/rapidjson/stringbuffer.h
+vector
+-
+
+/home/yun/git_repo/CLOUD_BASED_VO/CLOUD_BASED_VO_SERVER/core/slam/src/robotJson_server.cpp
+robotBase_server.h
+/home/yun/git_repo/CLOUD_BASED_VO/CLOUD_BASED_VO_SERVER/core/slam/src/robotBase_server.h
+

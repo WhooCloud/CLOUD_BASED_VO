@@ -15,32 +15,42 @@ sudo ./configure -j8
 make -j8  
 sudo make install -j8 
  
-###3. OpenCV
+### 3. OpenCV
 sudo apt-get install libopencv-dev
 
-###4. Eigen
+### 4. Eigen
 sudo apt-get install libeigen3-dev
 
-###5. RapidJson
+### 5. RapidJson
 RapidJson is included in CBVOS
 
 ## Enveironment Configuration
-###1. Chrony
+### 1. Chrony
 * Modify /etc/chrony/chrony.key
 Write "1 admin" into the first line.
 * Modify /etc/chrony/chrony.conf
 Replace "allow *" with "allow 0/0"
 * sudo service chrony restart
 
-###2. core/slam/src/SlamInterface.cpp
+### 2. core/slam/src/SlamInterface.cpp
 * Modify the variable ***string robotPath*** with the absolute path of data directory ***${robotPath}*** on your server.
 * chmod 777 -R ***${robotPath}***
 
-###3. core/slam/src/CMakeLists.txt
+### 3. core/slam/src/CMakeLists.txt
 * add include directories of Eigen & RapidJson
 add this two lines to your CMakeLists.txt  
 INCLUDE_DIRECTORIES(/usr/include/eigen3/)  
 INCLUDE_DIRECTORIES(/home/ubuntu/CLOUD_BASED_VO/rapidjson-master/include/)  
+
+### 4. make some directories
+cd {CBVOS}
+mkdir logs
+
+### 5. add dll path
+cd /ect/ld.so.conf.d/
+sudo vim ffi.conf
+add {CBVOS}/core/slam/lib to ffi.conf
+sudo ldconfig
 
 ## Build
 cd ${CBVOS/core/slam}  

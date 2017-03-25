@@ -53,13 +53,13 @@ int main()
 	initialMessage.setDocInt("min_inliers", min_inliers);
 	initialMessage.setDocDouble("max_norm", max_norm);
 	client.setDataSend(initialMessage.getString());
-	client.sendData();
+	client.sendTextData();
 	cout<<"Initializing Message Sent to Server Successfully!"<<endl;
 	cout<<"Initializing Message is: "<<initialMessage.getString()<<endl;
 	cout<< YELLOW "Sending Initializing Message to Server Costs: "<<(getCurrentTime() - time1)*1000<<" ms" RESET <<endl;
 
 	time1 = getCurrentTime();	
-	client.receiveData();
+	client.receiveTextData();
 	string stringDataReceiveInitial = client.getDataReceive();
 	cout<<"Initializing Message from Server: "<<stringDataReceiveInitial<<endl;
 	RobotJson receivedMessageInitial;
@@ -101,9 +101,9 @@ int main()
 		mainLoopMessage.setDocString("pts_obj", strPtsObj);
 		mainLoopMessage.setDocString("pts_img", strPtsImg);
 		client.setDataSend(mainLoopMessage.getString());
-		client.sendData();
+		client.sendTextData();
 
-		client.receiveData();
+		client.receiveTextData();
 		string stringDataReceive = client.getDataReceive();
 		cout<<stringDataReceive<<endl;
 		cout<< YELLOW "--Send & Wait & Receive Costs: "<<(getCurrentTime() - time1_mainloop)*1000<<" ms" RESET <<endl;
@@ -142,9 +142,9 @@ int main()
 	}
 
 	client.setDataSend(close_message);
-	client.sendData();
+	client.sendTextData();
 
-	client.receiveData();
+	client.receiveTextData();
 	string stringDataReceiveClose = client.getDataReceive();
 	cout<<stringDataReceiveClose<<endl;
 	

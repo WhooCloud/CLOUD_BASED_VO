@@ -32,4 +32,4 @@ camera.scale=1000.0;
 detector=ORB
 descriptor=ORB
 # 点云分辨率
-voxel_grid=0.01
+voxel_grid=0.02
