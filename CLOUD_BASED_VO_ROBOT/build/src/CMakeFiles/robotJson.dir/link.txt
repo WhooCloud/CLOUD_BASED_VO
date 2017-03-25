@@ -1,1 +1,0 @@
-g++  -fPIC -std=c++11 -O3  -Wno-deprecated -O3 -DNDEBUG    -shared -Wl,-soname,librobotJson.so -o ../../lib/librobotJson.so CMakeFiles/robotJson.dir/robotJson.cpp.o  -L/home/yun/git_repo/CLOUD_BASED_VO/CLOUD_BASED_VO_ROBOT/lib -Wl,-rpath,/home/yun/git_repo/CLOUD_BASED_VO/CLOUD_BASED_VO_ROBOT/lib 

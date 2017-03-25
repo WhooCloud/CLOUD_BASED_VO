@@ -1,3 +1,0 @@
-/home/yun/git_repo/CLOUD_BASED_VO/CLOUD_BASED_VO_SERVER/core/slam/build/src/CMakeFiles/robotJson_server.dir
-/home/yun/git_repo/CLOUD_BASED_VO/CLOUD_BASED_VO_SERVER/core/slam/build/src/CMakeFiles/slamBase_server.dir
-/home/yun/git_repo/CLOUD_BASED_VO/CLOUD_BASED_VO_SERVER/core/slam/build/src/CMakeFiles/slamInterface.dir

@@ -1,1 +1,0 @@
-g++  -fPIC -std=c++11 -O3 -O3 -DNDEBUG   -shared -Wl,-soname,librobotJson_server.so -o ../../lib/librobotJson_server.so CMakeFiles/robotJson_server.dir/robotJson_server.cpp.o  -L/home/yun/git_repo/CLOUD_BASED_VO/CLOUD_BASED_VO_SERVER/core/slam/lib 
