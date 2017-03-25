@@ -6,6 +6,9 @@ string points3fToString(vector<cv::Point3f> points3f);
 Eigen::Isometry3d createTMatrix(vector<double> v_d);
 Eigen::Isometry3d createTMatrix(string str_tMatrix);
 double getCurrentTime();
+string CompressString(string in_str);
+string DecompressString(string in_str);
+
 int main()
 {
 	double time1 = getCurrentTime();
@@ -52,15 +55,15 @@ int main()
 	initialMessage.setString(initial_message);
 	initialMessage.setDocInt("min_inliers", min_inliers);
 	initialMessage.setDocDouble("max_norm", max_norm);
-	client.setDataSend(initialMessage.getString());
+	client.setDataSend(CompressString(initialMessage.getString()));
 	client.sendBinaryData();
 	cout<<"Initializing Message Sent to Server Successfully!"<<endl;
 	cout<<"Initializing Message is: "<<initialMessage.getString()<<endl;
 	cout<< YELLOW "Sending Initializing Message to Server Costs: "<<(getCurrentTime() - time1)*1000<<" ms" RESET <<endl;
 
 	time1 = getCurrentTime();	
-	client.receiveTextData();
-	string stringDataReceiveInitial = client.getDataReceive();
+	client.receiveBinaryData();
+	string stringDataReceiveInitial = DecompressString(client.getDataReceive());
 	cout<<"Initializing Message from Server: "<<stringDataReceiveInitial<<endl;
 	RobotJson receivedMessageInitial;
 	receivedMessageInitial.setString(stringDataReceiveInitial);
@@ -100,11 +103,11 @@ int main()
 		time1_mainloop = getCurrentTime();
 		mainLoopMessage.setDocString("pts_obj", strPtsObj);
 		mainLoopMessage.setDocString("pts_img", strPtsImg);
-		client.setDataSend(mainLoopMessage.getString());
+		client.setDataSend(CompressString(mainLoopMessage.getString()));
 		client.sendBinaryData();
 
-		client.receiveTextData();
-		string stringDataReceive = client.getDataReceive();
+		client.receiveBinaryData();
+		string stringDataReceive = DecompressString(client.getDataReceive());
 		cout<<stringDataReceive<<endl;
 		cout<< YELLOW "--Send & Wait & Receive Costs: "<<(getCurrentTime() - time1_mainloop)*1000<<" ms" RESET <<endl;
 
@@ -141,11 +144,11 @@ int main()
 		cout<< YELLOW "MainLoop for Frame"<<currIndex<<"Costs: "<<(getCurrentTime() - time1)*1000<<" ms" RESET <<endl;
 	}
 
-	client.setDataSend(close_message);
+	client.setDataSend(CompressString(close_message));
 	client.sendBinaryData();
 
-	client.receiveTextData();
-	string stringDataReceiveClose = client.getDataReceive();
+	client.receiveBinaryData();
+	string stringDataReceiveClose = DecompressString(client.getDataReceive());
 	cout<<stringDataReceiveClose<<endl;
 	
 	client.close();

@@ -7,16 +7,48 @@
 #include <zlib.h>
 #include <curl/curl.h>
 
-#define CHUNK ROBOTJSON_MAXSTRINGLENGTH
+#define _CHUNK ROBOTJSON_MAXSTRINGLENGTH
+#define _COMPRESSLEVEL 9
 
+int CompressString(const char* in_str,size_t in_len, std::string& out_str, int level);
+int DecompressString(const char* in_str,size_t in_len, std::string& out_str);
+
+string CompressString(string in_str)
+{
+    string out_str;
+    int flag = CompressString(in_str.c_str(), in_str.length(), out_str, _COMPRESSLEVEL);
+    if(!flag)
+    {
+        return out_str;
+    }
+    else
+    {
+        cerr<< RED "CompressString(string in_str): "<< "Compress ERROR! ERROR Code is :"<<flag<<" " RESET <<endl;
+        return string("CompressString(string in_str): Compress ERROR! ");
+    }
+}
+
+string DecompressString(string in_str)
+{
+    string out_str;
+    int flag = DecompressString(in_str.c_str(), in_str.length(), out_str);
+    if(!flag)
+    {
+        return out_str;
+    }
+    else
+    {
+        cerr<< RED "DecompressString(string in_str): "<<"Decompress ERROR! ERROR Code is :"<<flag<<" " RESET<<endl;
+        return string ("DecompressString(string in_str): Decompress ERROR! ");
+    }
+}
 /* Compress from file source to file dest until EOF on source.
    def() returns Z_OK on success, Z_MEM_ERROR if memory could not be
    allocated for processing, Z_STREAM_ERROR if an invalid compression
    level is supplied, Z_VERSION_ERROR if the version of zlib.h and the
    version of the library linked do not match, or Z_ERRNO if there is
    an error reading or writing the files. */
-int CompressString(const char* in_str,size_t in_len,
-    std::string& out_str, int level)
+int CompressString(const char* in_str,size_t in_len, std::string& out_str, int level)
 {
     if(!in_str)
         return Z_DATA_ERROR;
@@ -25,7 +57,7 @@ int CompressString(const char* in_str,size_t in_len,
     unsigned have;
     z_stream strm;
 
-    unsigned char out[CHUNK];
+    unsigned char out[_CHUNK];
 
     /* allocate deflate state */
     strm.zalloc = Z_NULL;
@@ -45,7 +77,7 @@ int CompressString(const char* in_str,size_t in_len,
     /* compress until end of file */
     do {
         distance = end - in_str;
-        strm.avail_in = (distance>=CHUNK)?CHUNK:distance;
+        strm.avail_in = (distance>=_CHUNK)?_CHUNK:distance;
         strm.next_in = (Bytef*)in_str;
 
         // next pos
@@ -55,12 +87,12 @@ int CompressString(const char* in_str,size_t in_len,
         /* run deflate() on input until output buffer not full, finish
            compression if all of source has been read in */
         do {
-            strm.avail_out = CHUNK;
+            strm.avail_out = _CHUNK;
             strm.next_out = out;
             ret = deflate(&strm, flush);    /* no bad return value */
             if(ret == Z_STREAM_ERROR)
                 break;
-            have = CHUNK - strm.avail_out;
+            have = _CHUNK - strm.avail_out;
             out_str.append((const char*)out,have);
         } while (strm.avail_out == 0);
         if(strm.avail_in != 0);     /* all input will be used */
@@ -89,7 +121,7 @@ int DecompressString(const char* in_str,size_t in_len, std::string& out_str)
     int ret;
     unsigned have;
     z_stream strm;
-    unsigned char out[CHUNK];
+    unsigned char out[_CHUNK];
 
     /* allocate inflate state */
     strm.zalloc = Z_NULL;
@@ -114,7 +146,7 @@ int DecompressString(const char* in_str,size_t in_len, std::string& out_str)
     /* decompress until deflate stream ends or end of file */
     do {
         distance = end - in_str;
-        strm.avail_in = (distance>=CHUNK)?CHUNK:distance;
+        strm.avail_in = (distance>=_CHUNK)?_CHUNK:distance;
         strm.next_in = (Bytef*)in_str;
 
         // next pos
@@ -123,7 +155,7 @@ int DecompressString(const char* in_str,size_t in_len, std::string& out_str)
 
         /* run inflate() on input until output buffer not full */
         do {
-            strm.avail_out = CHUNK;
+            strm.avail_out = _CHUNK;
             strm.next_out = out;
             ret = inflate(&strm, Z_NO_FLUSH);
             if(ret == Z_STREAM_ERROR)  /* state not clobbered */
@@ -135,7 +167,7 @@ int DecompressString(const char* in_str,size_t in_len, std::string& out_str)
             case Z_MEM_ERROR:
                 return ret;
             }
-            have = CHUNK - strm.avail_out;
+            have = _CHUNK - strm.avail_out;
             out_str.append((const char*)out,have);
         } while (strm.avail_out == 0);
 

@@ -7,7 +7,7 @@ depth_dir=/home/yun/dataset/RGBD_SLAM/depth_png/
 rgb_extension=.png
 depth_extension=.png
 start_index=1
-end_index=700
+end_index=70
 
 #PCL
 visualize_pointcloud=yes
