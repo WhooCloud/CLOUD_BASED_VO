@@ -44,17 +44,25 @@ TARGET_LINK_LIBRARIES( slamBase
     ${OpenCV_LIBS} 
     ${PCL_LIBRARIES})
 
-ADD_EXECUTABLE(robot robot.cpp)
-TARGET_LINK_LIBRARIES( robot 
-	robotJson
-	robotWS
-	robot_
-	slamBase
-    ${OpenCV_LIBS} 
-    ${PCL_LIBRARIES})
-
-ADD_EXECUTABLE( test test.cpp )
-TARGET_LINK_LIBRARIES( test 
+#ADD_EXECUTABLE(robot robot.cpp)
+#TARGET_LINK_LIBRARIES( robot 
+#	robotJson
+#	robotWS
+#	robot_
+#	slamBase
+#    ${OpenCV_LIBS} 
+#    ${PCL_LIBRARIES})
+#
+#ADD_EXECUTABLE( test test.cpp )
+#TARGET_LINK_LIBRARIES( test 
+#	robotJson
+#	robotWS
+#	robot_
+#	${OpenCV_LIBS} 
+#	${PCL_LIBRARIES})
+#
+ADD_EXECUTABLE( basic_client basic_client.cpp )
+TARGET_LINK_LIBRARIES( basic_client 
 	robotJson
 	robotWS
 	robot_

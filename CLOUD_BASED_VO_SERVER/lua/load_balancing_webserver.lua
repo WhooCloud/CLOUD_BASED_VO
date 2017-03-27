@@ -8,7 +8,7 @@ if pcall(function () return slamInterface.FFIInterface end) then
     -- do nothing
 else
 ffi.cdef[[
-    char* FFIInterface(const char* data);
+    char* FFISLAMInterface(const char* data);
     unsigned long compressBound(unsigned long sourceLen);
     int compress2(uint8_t *dest, unsigned long *destLen,
               const uint8_t *source, unsigned long sourceLen, int level);
@@ -58,8 +58,6 @@ local function delay_ms(ms)
     return
 end
 
-
-
 local wb, err = server:new{
     --timeout = 30,  -- in milliseconds
     max_payload_len = 200*1024,
@@ -73,12 +71,9 @@ local close_string = "{\"type\" : \"close\", \"result\" : \"Success\"}"
 while true
 do
     local data = uncompress(receiveData(wb), 200*1024)
-    local c_result = slamInterface.FFIInterface(data)
-    --local receive_json = cjson.decode(data)
+
+    local c_result = slamInterface.FFISLAMInterface(data)
     ngx.log(ngx.INFO, "receive data is: ", data)
-    --ngx.log(ngx.INFO, "type is: ", receive_json.type)
-    --ngx.log(ngx.INFO, "pts_obj ", receive_json.pts_obj)
-    --ngx.log(ngx.INFO, "pts_img ", receive_json.pts_img) 
     ngx.log(ngx.INFO, "c_result ", ffi.string(c_result)) 
     ngx.log(ngx.INFO, "close: ", close_string == ffi.string(c_result))  
 

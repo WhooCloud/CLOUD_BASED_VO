@@ -12,13 +12,32 @@ Mat_<float> createCamera(ParameterReader& pd);
 vector<cv::Point2f> createPointsImg(const string& str_pts_img);
 vector<cv::Point3f> createPointsObj(const string& str_pts_obj);
 string eigenTToString(const Eigen::Isometry3d T);
-
 string slamCore(vector<cv::Point3f> &pts_obj, vector<cv::Point2f> &pts_img, Mat_<float>& cameraMatrix, ParameterReader& pd);
 double normofTransform(const cv::Mat rvec, const cv::Mat tvec);
+
 int CompressString(const char* in_str,size_t in_len,
     std::string& out_str, int level);
 int DecompressString(const char* in_str,size_t in_len,
 	std::string& out_str);
+string matToString(cv::Mat m);
+
+extern "C" char* FFISLAMInterface(const char* data)
+{
+	RobotJson JsonData;
+	JsonData.setString(string(data));
+	//Read uploading.yml
+    cv::FileStorage fs("/home/yun/ServerData/uploading.yml", cv::FileStorage::READ);
+    cv::Mat resultMatRead;  
+    fs["Descriptor"]>>resultMatRead; 
+	//Make some changes 
+	String StrMat;
+	StrMat = matToString(resultMatRead);
+	JsonData.setDocString("data", StrMat);
+	//Send back
+	string StrResult;
+	StrResult = JsonData.getString();
+	return strdup(StrResult.c_str());
+}
 
 extern "C" char* FFIInterface(const char* data)
 {
@@ -393,4 +412,18 @@ string eigenTToString(const Eigen::Isometry3d T)
 	}
 	str_T = ss.str();
 	return str_T;
+}
+
+string matToString(cv::Mat m)
+{
+    stringstream ss;
+    for(int i = 0; i < m.rows; i++)
+        for(int j = 0; j < m.cols; j++)
+            for(int d = 0; d < m.channels(); d++)
+            {
+                ss<<int(m.ptr<uchar>(i)[j*m.channels()+d]);
+                ss<<',';
+            }
+    string s = ss.str();            
+    return s;
 }

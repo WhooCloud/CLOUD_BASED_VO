@@ -1,7 +1,7 @@
-curr_dir=/usr/local/openresty/nginx/sbin
+curr_dir=/home/yun/git_repo/CLOUD_BASED_VO/CLOUD_BASED_VO_SERVER/core/slam/lib
 type=initialize
-min_inliers=6
-max_norm=0.3
+min_inliers=-1
+max_norm=-1
 camera_cx=325.5
 camera_cy=253.5
 camera_fx=518

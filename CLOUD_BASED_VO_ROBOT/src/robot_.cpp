@@ -12,6 +12,16 @@
 
 int CompressString(const char* in_str,size_t in_len, std::string& out_str, int level);
 int DecompressString(const char* in_str,size_t in_len, std::string& out_str);
+void uploadFileHTTP(const char* file_path, const char* url);
+
+void uploadMatHTTP(const char* key, cv::Mat src, const char* file_path, const char* url)
+{
+    cv::FileStorage fs(file_path, cv::FileStorage::WRITE);
+    fs << key << src;
+    fs.release(); 
+    uploadFileHTTP(file_path, url);
+    return ;
+}
 
 string CompressString(string in_str)
 {
