@@ -34,7 +34,6 @@ Replace "allow *" with "allow 0/0"
 
 ### 2. core/slam/src/SlamInterface.cpp
 * Modify the variable ***string robotPath*** with the absolute path of data directory ***${robotPath}*** on your server.
-* chmod 777 -R ***${robotPath}***
 
 ### 3. core/slam/src/CMakeLists.txt
 * add include directories of Eigen & RapidJson
@@ -46,7 +45,11 @@ INCLUDE_DIRECTORIES(/home/ubuntu/CLOUD_BASED_VO/rapidjson-master/include/)
 local dst_dir = "/home/yun/ServerData/"
 change dst_dir to the path where you want to save uploaded files
 
-### 5. add dll path
+### 5. core/slam/src/SlamInterface.cpp
+cv::FileStorage fs("/home/yun/ServerData/uploading.yml", cv::FileStorage::READ);
+change the first argument into dst_dir
+
+### 6. add dll path
 cd /ect/ld.so.conf.d/
 sudo vim ffi.conf
 add {CBVOS}/core/slam/lib to ffi.conf

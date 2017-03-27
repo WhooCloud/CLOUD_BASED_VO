@@ -50,6 +50,12 @@ add these lines to your CMakeLists.txt
 INCLUDE_DIRECTORIES(/usr/include/eigen3/)  
 INCLUDE_DIRECTORIES( /home/ubuntu/CLOUD_BASED_VO/rapidjson-master/include/ )  
 
+###3. CBVOR/src/basic_client.cpp
+StrImgName should be changed into your image path
+StrUploadURL should be changed into server uploading url
+StrWSURL should be changed into server websocket url
+
+
 ## Build
 cd ${CBVOR}  
 mkdir build  
