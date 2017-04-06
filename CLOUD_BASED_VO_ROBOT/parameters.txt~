@@ -1,5 +1,5 @@
 #WS
-url=ws://test-745620336.ap-northeast-2.elb.amazonaws.com/websocket
+url=ws://test-748738573.ap-northeast-2.elb.amazonaws.com/websocket
 
 #Data
 rgb_dir=/home/yun/dataset/RGBD_SLAM/rgb_png/

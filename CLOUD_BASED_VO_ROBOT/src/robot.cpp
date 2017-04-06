@@ -45,7 +45,7 @@ int main()
 	FRAME lastFrame = readFrame(currIndex, pd);
 	computeKeyPointsAndDesp(lastFrame, detector, descriptor);
 	PointCloud::Ptr cloud = image2PointCloud(lastFrame.rgb, lastFrame.depth, camera);
-	pcl::visualization::CloudViewer viewer("viewer");
+	// pcl::visualization::CloudViewer viewer("viewer");
 	cout<<"Initializing Done!"<<endl;
 	cout<< YELLOW "Initializing Costs: "<<(getCurrentTime() - time1)*1000<<" ms" RESET <<endl;
 
@@ -131,8 +131,8 @@ int main()
 		    time1_mainloop = getCurrentTime();
 			cloud = joinPointCloud(cloud, currFrame, TMatrix, camera);
 		   	
-			if(visualize == true)
-				viewer.showCloud(cloud);
+			// if(visualize == true)
+			// 	viewer.showCloud(cloud);
 			lastFrame = currFrame;
 			cout<< YELLOW "--JoinPointCloud Costs: "<<(getCurrentTime() - time1_mainloop)*1000<<" ms" RESET <<endl;
 		}
@@ -154,9 +154,9 @@ int main()
 	client.close();
 	cout<<"Connection Closed!"<<endl;
 	//pcl::io::savePCDFile("./data/result.pcd", *cloud);
-    while(!viewer.wasStopped())
-    {
-    }
+    // while(!viewer.wasStopped())
+    // {
+    // }
 	return 0;
 
 }
